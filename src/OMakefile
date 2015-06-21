@@ -37,6 +37,7 @@ USE_OCAMLFIND = true
 #
 OCAMLPACKS[] =
 	yojson
+	core
 #
 if $(not $(OCAMLFIND_EXISTS))
     eprintln(This project requires ocamlfind, but is was not found.)
@@ -54,7 +55,7 @@ BYTE_ENABLED = $(not $(OCAMLOPT_EXISTS))
 #
 # Various options
 #
-OCAMLFLAGS    += -g
+OCAMLFLAGS    += -g -thread
 OCAMLCFLAGS   +=
 OCAMLOPTFLAGS +=
 OCAML_LINK_FLAGS += -linkall
@@ -73,7 +74,7 @@ OCAML_LINK_FLAGS += -linkall
 LIB = rand-json
 FILES = $(removesuffix $(ls *.ml))
 
-OCamlProgram($(LIB), $(FILES)
+OCamlProgram($(LIB), $(FILES))
 
 lib: rand-json$(EXE)
 all: lib

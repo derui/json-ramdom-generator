@@ -23,7 +23,7 @@ open MyOCaml
 ########################################################################
 # Phony targets are scoped, so you probably want to declare them first.
 #
-.PHONY: test clean doc all
+.PHONY: test clean all
 
 ########################################################################
 # Subdirectories.
@@ -31,7 +31,7 @@ open MyOCaml
 # If so, define the subdirectory targets and uncomment this section.
 #
 
-.SUBDIRS: src test doc
+.SUBDIRS: src test
 
 ########################################################################
 # OCaml configuration.
