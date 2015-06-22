@@ -14,6 +14,7 @@ let convert_variant ~name ~js =
       match js with
       | None -> eprintf "'random' should have any value as type to specify"; exit 2
       | Some(`Int bound) -> `Int (Random.int bound) (* random of int returns between 0 and given value. *)
+      | Some(`Float bound) -> `Float (Random.float bound) (* random of int returns between 0 and given value. *)
       | Some(`String _) -> `String (make_random_string ())
       | _ -> `Null
     end
@@ -22,6 +23,7 @@ let convert_variant ~name ~js =
 let generate_randomize_json json num =
   let rec replace json () =
     match json with
+    | `List list -> `List (List.map ~f:(fun j -> replace j ()) list)
     | `Variant (name, js) -> convert_variant ~name ~js
     | `Assoc list -> `Assoc (List.map ~f:(fun (name, js) -> (name, replace js ())) list)
     | js -> js
